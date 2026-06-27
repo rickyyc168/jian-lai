@@ -820,26 +820,7 @@ a.link-internal:hover, .enchantment-link:hover {
 	</script>
 
 <!-- 底部数值栏 -->
-<style>
-#mobile-stats-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 99998;
-  background: rgba(17,17,17,0.95);
-  border-top: 1px solid #444;
-  padding: 8px 16px;
-  font-size: 14px;
-  line-height: 1.8;
-  color: #eee;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-#mobile-stats-bar:empty { display: none; }
-#mobile-stats-bar .stats-title { font-weight: bold; font-size: 15px; margin-bottom: 2px; }
-</style>
-<div id="mobile-stats-bar"></div>
+<div id="mobile-stats-bar" style="display:none;position:fixed;bottom:60px;left:10px;right:10px;z-index:99998;background:rgba(17,17,17,0.95);border:1px solid #444;border-radius:8px;padding:10px 14px;font-size:14px;line-height:1.8;color:#eee;box-shadow:0 -2px 10px rgba(0,0,0,0.5);"></div>
 <script>
 (function() {
   var bar = document.getElementById("mobile-stats-bar");
@@ -848,7 +829,7 @@ a.link-internal:hover, .enchantment-link:hover {
   function renderStats() {
     try {
       var v = SugarCube.State.variables;
-      var html = '<div class="stats-title">陈平安</div>';
+      var html = '<strong style="font-size:15px;">陈平安</strong><br>';
       html += '银两：' + Number(v.money || 0).toFixed(0) + ' 两';
       html += ' &nbsp;|&nbsp; ';
       html += '修为：' + Number(v.cultivation || 0).toFixed(0) + ' / 100';
@@ -859,12 +840,9 @@ a.link-internal:hover, .enchantment-link:hover {
       html += ' &nbsp;|&nbsp; ';
       html += '线索：' + Number(v.clue || 0).toFixed(0) + ' / 5';
       bar.innerHTML = html;
-    } catch(e) {}
-  }
-
-  function tryShow() {
-    if (typeof SugarCube !== "undefined" && SugarCube.State && SugarCube.State.variables) {
-      renderStats();
+      bar.style.display = "block";
+    } catch(e) {
+      bar.style.display = "none";
     }
   }
 
@@ -875,9 +853,10 @@ a.link-internal:hover, .enchantment-link:hover {
     }
   }, 300);
 
-  jQuery(document).on(":passageend", function() { setTimeout(tryShow, 100); });
-  jQuery(document).on(":uiupdate", function() { setTimeout(tryShow, 100); });
+  jQuery(document).on(":passageend", function() { setTimeout(renderStats, 200); });
+  jQuery(document).on(":uiupdate", function() { setTimeout(renderStats, 200); });
 })();
 </script>
+
 </body>
 </html>
