@@ -822,7 +822,6 @@ a.link-internal:hover, .enchantment-link:hover {
 <!-- 底部数值栏 -->
 <style>
 #mobile-stats-bar {
-  display: none;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -837,11 +836,8 @@ a.link-internal:hover, .enchantment-link:hover {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
-#mobile-stats-bar .stats-title {
-  font-weight: bold;
-  font-size: 15px;
-  margin-bottom: 2px;
-}
+#mobile-stats-bar:empty { display: none; }
+#mobile-stats-bar .stats-title { font-weight: bold; font-size: 15px; margin-bottom: 2px; }
 </style>
 <div id="mobile-stats-bar"></div>
 <script>
@@ -866,30 +862,21 @@ a.link-internal:hover, .enchantment-link:hover {
     } catch(e) {}
   }
 
-  function show() {
+  function tryShow() {
     if (typeof SugarCube !== "undefined" && SugarCube.State && SugarCube.State.variables) {
-      bar.style.display = "block";
       renderStats();
     }
   }
 
-  // Wait for SugarCube to be ready
   var ready = setInterval(function() {
     if (typeof SugarCube !== "undefined" && SugarCube.State && SugarCube.State.variables) {
       clearInterval(ready);
-      show();
+      renderStats();
     }
   }, 300);
 
-  // Update on every passage end
-  jQuery(document).on(":passageend", function() {
-    setTimeout(show, 100);
-  });
-
-  // Update on ui update
-  jQuery(document).on(":uiupdate", function() {
-    setTimeout(show, 100);
-  });
+  jQuery(document).on(":passageend", function() { setTimeout(tryShow, 100); });
+  jQuery(document).on(":uiupdate", function() { setTimeout(tryShow, 100); });
 })();
 </script>
 </body>
