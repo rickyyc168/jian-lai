@@ -820,7 +820,7 @@ a.link-internal:hover, .enchantment-link:hover {
 	</script>
 
 <!-- 底部数值栏 -->
-<div id="mobile-stats-bar" style="display:none;position:fixed;bottom:60px;left:10px;right:10px;z-index:99998;background:rgba(17,17,17,0.95);border:1px solid #444;border-radius:8px;padding:10px 14px;font-size:14px;line-height:1.8;color:#eee;box-shadow:0 -2px 10px rgba(0,0,0,0.5);"></div>
+<div id="mobile-stats-bar" style="display:block;position:fixed;bottom:60px;left:10px;right:10px;z-index:99998;background:rgba(17,17,17,0.95);border:1px solid #444;border-radius:8px;padding:10px 14px;font-size:14px;line-height:1.8;color:#eee;box-shadow:0 -2px 10px rgba(0,0,0,0.5);">⏳ 加载中...</div>
 <script>
 (function() {
   var bar = document.getElementById("mobile-stats-bar");
@@ -840,9 +840,9 @@ a.link-internal:hover, .enchantment-link:hover {
       html += ' &nbsp;|&nbsp; ';
       html += '线索：' + Number(v.clue || 0).toFixed(0) + ' / 5';
       bar.innerHTML = html;
-      bar.style.display = "block";
+      // bar is always visible
     } catch(e) {
-      bar.style.display = "none";
+      bar.innerHTML = "⏳ 加载中...";
     }
   }
 
