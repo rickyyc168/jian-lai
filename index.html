@@ -884,5 +884,79 @@ a.link-internal:hover, .enchantment-link:hover {
   });
 })();
 </script>
+
+<!-- 手机版底部数值栏 -->
+<style>
+#mobile-stats-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99998;
+  background: rgba(17,17,17,0.95);
+  border-top: 1px solid #444;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #eee;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  max-height: 40vh;
+  overflow-y: auto;
+}
+#mobile-stats-bar h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  color: #fff;
+}
+#mobile-stats-bar p {
+  margin: 0;
+}
+#mobile-stats-bar br + br { display: none; }
+
+@media screen and (max-width: 768px) {
+  #mobile-stats-bar { display: block; }
+  #passages { padding-bottom: 80px !important; }
+  #bgm-toggle { bottom: 70px !important; }
+}
+</style>
+<div id="mobile-stats-bar"></div>
+<script>
+(function() {
+  var isMobile = function() { return window.innerWidth <= 768; };
+  var bar = document.getElementById("mobile-stats-bar");
+
+  function syncStats() {
+    if (!isMobile()) { bar.style.display = "none"; return; }
+    bar.style.display = "";
+    var caption = document.getElementById("story-caption");
+    if (caption) {
+      bar.innerHTML = caption.innerHTML;
+    }
+  }
+
+  // Sync on passage display
+  jQuery(document).on(":passageend.mobile-stats", function() {
+    setTimeout(syncStats, 100);
+  });
+
+  // Sync on ui update
+  jQuery(document).on(":uiupdate.mobile-stats", function() {
+    setTimeout(syncStats, 50);
+  });
+
+  // Handle resize
+  var resizeTimer;
+  window.addEventListener("resize", function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(syncStats, 150);
+  });
+
+  // Initial sync after load
+  setTimeout(syncStats, 500);
+})();
+</script>
+
 </body>
 </html>
