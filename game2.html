@@ -1332,7 +1332,7 @@ HR找你谈话，委婉地暗示你可以考虑自己离职。&lt;br&gt;
 	</script>
 
 <!-- 底部数值栏 -->
-<div id="mobile-stats-bar" style="display:block;position:fixed;bottom:0;left:0;right:0;z-index:99998;background:rgba(26,35,50,0.95);border-top:1px solid #3498db;padding:10px 14px;font-size:13px;line-height:1.8;color:#eee;box-shadow:0 -2px 10px rgba(0,0,0,0.3);">⏳ 加载中...</div>
+<div id="mobile-stats-bar" style="display:block;position:fixed;bottom:60px;left:10px;right:10px;z-index:99998;background:rgba(17,17,17,0.95);border:1px solid #444;border-radius:8px;padding:10px 14px;font-size:14px;line-height:1.8;color:#eee;box-shadow:0 -2px 10px rgba(0,0,0,0.5);">⏳ 加载中...</div>
 <script>
 (function() {
   var bar = document.getElementById("mobile-stats-bar");
@@ -1341,22 +1341,18 @@ HR找你谈话，委婉地暗示你可以考虑自己离职。&lt;br&gt;
   function renderStats() {
     try {
       var v = SugarCube.State.variables;
-      var html = '<strong style="font-size:14px;">林昊 · 银行新人</strong>';
-      var chapter = Number(v.chapter || 0);
-      if (chapter >= 1) html += ' <span style="color:#7f8c8d;">第' + chapter + '章</span>';
-      html += '<br>';
-      html += '<span style="color:#3498db;">业务 ' + Number(v.ability || 0) + '</span>';
+      var html = '<strong style="font-size:15px;">林昊 · 银行新人</strong><br>';
+      html += '业务：' + Number(v.ability || 0).toFixed(0);
       html += ' &nbsp;|&nbsp; ';
-      html += '<span style="color:#2ecc71;">人情 ' + Number(v.social || 0) + '</span>';
+      html += '人情：' + Number(v.social || 0).toFixed(0);
       html += ' &nbsp;|&nbsp; ';
-      html += '<span style="color:#f39c12;">领导 ' + Number(v.leader || 0) + '</span>';
+      html += '领导：' + Number(v.leader || 0).toFixed(0);
       html += ' &nbsp;|&nbsp; ';
-      html += '<span style="color:#9b59b6;">抗压 ' + Number(v.resilience || 0) + '</span>';
+      html += '抗压：' + Number(v.resilience || 0).toFixed(0);
       html += ' &nbsp;|&nbsp; ';
-      html += '<span style="color:#e74c3c;">口碑 ' + Number(v.reputation || 0) + '</span>';
-      var zf = Number(v.zhang_favor || 0);
-      if (zf > 0) html += ' &nbsp;|&nbsp; <span style="color:#95a5a6;">张姐 ' + zf + '</span>';
+      html += '口碑：' + Number(v.reputation || 0).toFixed(0);
       bar.innerHTML = html;
+      // bar is always visible
     } catch(e) {
       bar.innerHTML = "⏳ 加载中...";
     }
@@ -1378,14 +1374,14 @@ HR找你谈话，委婉地暗示你可以考虑自己离职。&lt;br&gt;
 <style>
 #bgm-toggle {
   position: fixed;
-  bottom: 80px;
+  bottom: 140px;
   right: 20px;
   z-index: 99999;
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(26,35,50,0.9);
-  border: 1px solid #3498db;
+  background: rgba(17,17,17,0.9);
+  border: 1px solid #444;
   color: #fff;
   font-size: 22px;
   cursor: pointer;
@@ -1396,7 +1392,7 @@ HR找你谈话，委婉地暗示你可以考虑自己离职。&lt;br&gt;
   transition: all 0.2s;
 }
 #bgm-toggle:hover {
-  background: #3498db;
+  background: #555;
   transform: scale(1.1);
 }
 </style>
