@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>黑风令</title>
+<title>互动剧情游戏</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; overflow: hidden; }
@@ -120,8 +120,8 @@ body {
 </head>
 <body>
 <div class="gate-container">
-  <div class="gate-title">黑风令</div>
-  <div class="gate-subtitle">输入密令以入局</div>
+  <div class="gate-title">互动剧情游戏</div>
+  <div class="gate-subtitle">输入密令开始体验</div>
   <div class="gate-input-wrap">
     <input class="gate-input" id="gate-password" type="password" placeholder="请输入密令" maxlength="10" autofocus>
   </div>
@@ -133,7 +133,7 @@ body {
 (function() {
   var routes = {
     "111": "game1.html",
-    "第二款游戏": "game2.html"
+    "101": "game2.html"
   };
   var input = document.getElementById("gate-password");
   var btn = document.getElementById("gate-enter");
